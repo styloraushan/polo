@@ -1,0 +1,1325 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>polo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+      body {
+        background-color: #f8f9fc;
+      }
+      /* Logo container */
+      .logo {
+        padding: 6px 10px;
+        border-radius: 12px;
+      }
+
+      /* Logo image */
+      .logo img {
+        height: 90px; /* perfect for navbar */
+        width: auto;
+        object-fit: contain;
+        transition:
+          transform 0.3s ease,
+          filter 0.3s ease;
+      }
+
+      /* Hover effect */
+      .logo img:hover {
+        transform: scale(1.08);
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+      }
+
+      /* Mobile responsive */
+      @media (max-width: 576px) {
+        .logo img {
+          height: 36px;
+        }
+      }
+
+      /* Navbar */
+      .navbar {
+        border-radius: 0 0 22px 22px;
+        backdrop-filter: blur(10px);
+      }
+
+      /* Nav links */
+      .navbar-nav .nav-link {
+        font-size: 20px;
+        font-weight: 500;
+        padding: 8px 20px;
+        position: relative;
+      }
+
+      .navbar-nav .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 3px;
+        background: #7b3fe4;
+        bottom: 0;
+        left: 50%;
+        transition: 0.3s;
+        transform: translateX(-50%);
+        border-radius: 10px;
+      }
+
+      .navbar-nav .nav-link:hover::after {
+        width: 70%;
+      }
+
+      /* Search (desktop) */
+      .search-box {
+        max-width: 320px;
+        position: relative;
+      }
+
+      .search-box input {
+        height: 46px;
+        border-radius: 30px;
+        padding-left: 45px;
+        background: #f1f3f6;
+        box-shadow: inset 0 0 0 1px #e5e7eb;
+      }
+
+      .search-box::before {
+        content: "\F52A";
+        font-family: bootstrap-icons;
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 18px;
+        color: #777;
+      }
+
+      /* Icons */
+      .header-icon {
+        font-size: 22px;
+        cursor: pointer;
+        transition:
+          transform 0.25s ease,
+          color 0.25s ease;
+      }
+
+      .header-icon:hover {
+        transform: scale(1.2);
+        color: #7b3fe4;
+      }
+
+      .badge {
+        font-size: 10px;
+        padding: 4px 6px;
+      }
+
+      /* Icon links */
+      .icon-link {
+        font-size: 18px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: 0.3s;
+      }
+
+      .icon-link i {
+        font-size: 22px;
+      }
+
+      .icon-link:hover {
+        color: #7b3fe4 !important;
+        transform: translateY(-2px);
+      }
+
+      /* Cart badge */
+      .badge {
+        font-size: 11px;
+        padding: 5px 7px;
+      }
+
+      /* Mobile search */
+      .mobile-search-box {
+        display: none;
+        background: #fff;
+        border-radius: 0 0 18px 18px;
+        box-shadow: 0 14px 25px rgba(0, 0, 0, 0.1);
+        animation: slideDown 0.3s ease;
+      }
+
+      .mobile-search-box input {
+        height: 45px;
+        border-radius: 25px;
+        padding-left: 40px;
+        background: #f1f3f6;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 991px) {
+        .search-box {
+          display: none;
+        }
+
+        .desktop-icons {
+          display: none;
+        }
+
+        .navbar-collapse {
+          margin-top: 14px;
+        }
+      }
+
+      @media (min-width: 992px) {
+        .mobile-icons {
+          display: none;
+        }
+      }
+      /* Offcanvas */
+      .offcanvas {
+        border-radius: 20px 0 0 20px;
+      }
+
+      .offcanvas .nav-link {
+        font-size: 18px;
+        font-weight: 500;
+        padding: 10px 0;
+      }
+
+      .offcanvas .nav-link:hover {
+        color: #7b3fe4;
+      }
+      /* Sidebar size & shape */
+      .mobile-sidebar {
+        width: 85%;
+        max-width: 360px;
+        border-radius: 20px 0 0 20px;
+      }
+
+      /* Header */
+      .sidebar-header {
+        padding: 16px;
+      }
+
+      .sidebar-logo {
+        height: 40px;
+      }
+
+      /* Auth buttons */
+      .btn-login {
+        background: #f46c4e;
+        color: #fff;
+        font-weight: 600;
+        padding: 14px;
+        border-radius: 10px;
+        border: none;
+      }
+
+      .btn-login:hover {
+        background: #e45b3d;
+      }
+
+      .btn-signup {
+        background: #f1f3f6;
+        color: #333;
+        font-weight: 600;
+        padding: 14px;
+        border-radius: 10px;
+      }
+
+      /* Menu list */
+      .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .sidebar-menu li a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+        font-size: 16px;
+        color: #000;
+        text-decoration: none;
+        border-bottom: 1px solid #f2f2f2;
+      }
+
+      .sidebar-menu li a:hover {
+        background: #fafafa;
+      }
+
+      .sidebar-menu i {
+        color: #999;
+      }
+
+      /* Bottom icons */
+      .sidebar-icons {
+        display: flex;
+        gap: 26px;
+        justify-content: center;
+        margin-top: 30px;
+        font-size: 22px;
+      }
+
+      .sidebar-icons i {
+        cursor: pointer;
+        color: #444;
+      }
+
+      .sidebar-icons i:hover {
+        color: #f46c4e;
+      }
+
+      .hero-wrapper {
+        background: #eef7fa;
+      }
+
+      /* Image sizing */
+      .heroSwiper img {
+        width: 100%;
+        height: 750px; /* increase/decrease as needed */
+        object-fit: cover;
+      }
+
+      /* Floating round arrows */
+      .swiper-button-prev,
+      .swiper-button-next {
+        width: 46px;
+        height: 46px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        color: #000;
+      }
+
+      .swiper-button-prev::after,
+      .swiper-button-next::after {
+        font-size: 18px;
+      }
+
+      /* Pagination dots */
+      .swiper-pagination-bullet {
+        background: #bbb;
+        opacity: 1;
+      }
+
+      .swiper-pagination-bullet-active {
+        background: #000;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .heroSwiper img {
+          height: 280px;
+        }
+      }
+
+      .trending-section h2 {
+        font-weight: 600;
+        color: #333;
+      }
+
+      .trending-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 18px;
+      }
+
+      .trend-card {
+        border-radius: 18px;
+        text-align: center;
+
+        cursor: pointer;
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .trend-card img {
+        width: 100%;
+        max-height: 230px;
+        object-fit: contain;
+        margin-bottom: 8px;
+      }
+
+      .trend-card p {
+        margin: 0;
+        font-weight: 500;
+        color: #1e5aa7;
+        font-size: 15px;
+      }
+
+      /* Hover (desktop) */
+      .trend-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+      }
+
+      /* Mobile optimization */
+      @media (max-width: 576px) {
+        .trend-card {
+          padding: 12px;
+        }
+
+        .trend-card p {
+          font-size: 14px;
+        }
+      }
+
+      .back-school-section h2 {
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      .subtitle {
+        color: #777;
+        margin-bottom: 30px;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* desktop */
+        gap: 22px;
+      }
+
+      .product-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 15px;
+        text-decoration: none;
+        color: inherit;
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .product-card img {
+        width: 100%;
+        border-radius: 14px;
+        margin-bottom: 10px;
+      }
+
+      .product-card h4 {
+        font-size: 16px;
+        margin: 6px 0;
+      }
+
+      .product-card .desc {
+        font-size: 14px;
+        color: #666;
+        min-height: 38px;
+      }
+
+      .price {
+        margin-top: 10px;
+      }
+
+      .price .new {
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      .price .old {
+        text-decoration: line-through;
+        color: #999;
+        margin-left: 6px;
+      }
+
+      .price .off {
+        color: #ff4d2d;
+        margin-left: 6px;
+        font-weight: 500;
+      }
+
+      /* Hover */
+      .product-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      }
+
+      /* Mobile tweaks */
+      @media (max-width: 576px) {
+        .product-card {
+          padding: 12px;
+        }
+      }
+      /* Tablet */
+      @media (max-width: 992px) {
+        .product-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* Mobile → 2 columns per row */
+      @media (max-width: 576px) {
+        .product-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 14px;
+        }
+
+        .product-card {
+          padding: 12px;
+        }
+
+        .product-card h4 {
+          font-size: 14px;
+        }
+
+        .product-card .desc {
+          font-size: 13px;
+        }
+      }
+
+      .site-footer {
+        background: #fff7f4;
+        padding: 50px 20px 20px;
+        color: #555;
+        font-size: 14px;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+      }
+
+      .footer-col h4 {
+        font-size: 14px;
+        margin-bottom: 14px;
+        color: #1e5aa7;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .footer-col ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-col ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-col ul li a {
+        color: #666;
+        text-decoration: none;
+      }
+
+      .footer-col ul li a:hover {
+        color: #1e5aa7;
+      }
+
+      .brand .logo {
+        width: 80px;
+        margin-bottom: 12px;
+      }
+
+      .brand p {
+        margin-bottom: 16px;
+        line-height: 1.6;
+      }
+
+      .social-icons a {
+        width: 36px;
+        height: 36px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: #eee;
+        margin-right: 8px;
+        color: #555;
+        font-size: 15px;
+        text-decoration: none;
+      }
+
+      .social-icons a:hover {
+        background: #1e5aa7;
+        color: #fff;
+      }
+
+      .payment-icons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .payment-icons img {
+        height: 28px;
+        object-fit: contain;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 25px;
+        margin-top: 30px;
+        border-top: 1px solid #ddd;
+        font-size: 13px;
+        color: #777;
+      }
+
+      /* Tablet */
+      @media (max-width: 992px) {
+        .footer-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 576px) {
+        .footer-container {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+        }
+
+        .brand {
+          grid-column: span 2;
+        }
+      }
+
+      /* Modal box */
+      .support-modal {
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      /* Support items */
+      .support-item {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px 20px;
+        text-decoration: none;
+        color: #000;
+        border-bottom: 1px solid #eee;
+      }
+
+      .support-item:last-child {
+        border-bottom: none;
+      }
+
+      .support-item strong {
+        font-size: 15px;
+      }
+
+      .support-item p {
+        font-size: 13px;
+        color: #777;
+        margin: 2px 0 0;
+      }
+
+      .support-item i {
+        font-size: 18px;
+        color: #999;
+        align-self: center;
+      }
+
+      /* Hover */
+      .support-item:hover {
+        background: #fafafa;
+      }
+
+      .support-item:hover i {
+        color: #f46c4e;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm py-3 sticky-top">
+      <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand logo" href="#"
+          ><img src="assets/logo.png" alt=""
+        /></a>
+
+        <!-- Mobile Icons -->
+        <div class="d-flex align-items-center gap-3 ms-auto d-lg-none">
+          <i class="bi bi-search header-icon" onclick="toggleSearch()"></i>
+
+          <div class="position-relative">
+            <i class="bi bi-bag header-icon"></i>
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge bg-dark rounded-pill"
+              >0</span
+            >
+          </div>
+
+          <!-- Menu Button -->
+          <button
+            class="btn border-0"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#mobileMenu"
+          >
+            <i class="bi bi-list fs-2"></i>
+          </button>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="d-none d-lg-flex align-items-center w-100">
+          <ul class="navbar-nav mx-4 flex-row align-items-center">
+            <li class="nav-item">
+              <a class="nav-link" href="#">School Supplies</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">Calendars</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                >Categories</a
+              >
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Books</a></li>
+                <li><a class="dropdown-item" href="#">Stationery</a></li>
+                <li><a class="dropdown-item" href="#">Bags</a></li>
+                <li><a class="dropdown-item" href="#">Office Supplies</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- Desktop Search -->
+          <form class="search-box me-auto">
+            <input
+              class="form-control border-0"
+              type="search"
+              placeholder="Search products..."
+            />
+          </form>
+
+          <!-- Desktop Icons -->
+          <div class="d-flex align-items-center gap-4">
+            <!-- <a href="#" class="text-dark text-decoration-none icon-link">
+              <i class="bi bi-chat-dots"></i> Support
+            </a> -->
+
+            <a
+              href="#"
+              class="text-dark text-decoration-none icon-link"
+              data-bs-toggle="modal"
+              data-bs-target="#supportModal"
+            >
+              <i class="bi bi-chat-dots"></i> Support
+            </a>
+
+            <a
+              href="#"
+              class="text-dark text-decoration-none icon-link"
+              data-bs-toggle="modal"
+              data-bs-target="#trackModal"
+            >
+              <i class="bi bi-truck"></i> Track
+            </a>
+
+            <div
+              class="position-relative"
+              role="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#cartCanvas"
+              aria-controls="cartCanvas"
+            >
+              <i class="bi bi-bag header-icon"></i>
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge bg-dark rounded-pill"
+                >0</span
+              >
+            </div>
+            <a
+              href="#"
+              class="text-dark"
+              data-bs-toggle="modal"
+              data-bs-target="#signinmodal"
+              ><i class="bi bi-person header-icon"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div
+      class="offcanvas offcanvas-end mobile-sidebar"
+      tabindex="-1"
+      id="mobileMenu"
+    >
+      <!-- Header -->
+      <div class="offcanvas-header sidebar-header">
+        <img src="assets/logo.png" class="sidebar-logo" alt="Logo" />
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+        ></button>
+      </div>
+
+      <!-- Auth Buttons -->
+      <div class="px-3">
+        <a href="#" class="btn btn-login w-100 mb-2">
+          LOGIN <i class="bi bi-arrow-right"></i>
+        </a>
+        <a href="#" class="btn btn-signup w-100"> SIGN UP </a>
+      </div>
+
+      <!-- Menu -->
+      <div class="offcanvas-body pt-3">
+        <ul class="sidebar-menu">
+          <li>
+            <a href="#">School Supplies <i class="bi bi-chevron-right"></i></a>
+          </li>
+          <li>
+            <a href="#">Calendars <i class="bi bi-chevron-right"></i></a>
+          </li>
+          <li>
+            <a href="#">Books <i class="bi bi-chevron-right"></i></a>
+          </li>
+          <li>
+            <a href="#">Stationery <i class="bi bi-chevron-right"></i></a>
+          </li>
+          <li>
+            <a href="#">Bags <i class="bi bi-chevron-right"></i></a>
+          </li>
+          <li>
+            <a href="#">Office Supplies <i class="bi bi-chevron-right"></i></a>
+          </li>
+        </ul>
+
+        <!-- Bottom Icons -->
+        <div class="sidebar-icons">
+          <i class="bi bi-chat-dots"></i>
+          <i class="bi bi-truck"></i>
+          <i class="bi bi-person"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Search Input -->
+    <div class="container mobile-search-box" id="mobileSearch">
+      <input
+        class="form-control"
+        type="search"
+        placeholder="Search products..."
+      />
+    </div>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="cartCanvas">
+      <!-- Header -->
+      <div class="offcanvas-header text-white" style="background: #8e4b9b">
+        <h5 class="offcanvas-title fw-semibold">MY CART</h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="offcanvas"
+        ></button>
+      </div>
+
+      <!-- Body -->
+      <div class="offcanvas-body d-flex flex-column p-3">
+        <!-- Cart Item -->
+        <div class="d-flex mb-3">
+          <img src="https://via.placeholder.com/70" class="rounded me-3" />
+
+          <div class="flex-grow-1">
+            <h6 class="mb-1">Raushan Kumar's Catch-All Pouch</h6>
+            <div class="fw-semibold">
+              ₹499 <del class="text-muted fs-6">₹599</del>
+              <span class="badge bg-danger ms-1">16% Off</span>
+            </div>
+
+            <div class="d-flex align-items-center mt-2">
+              <button class="btn btn-outline-dark btn-sm">−</button>
+              <span class="mx-2">1</span>
+              <button class="btn btn-outline-dark btn-sm">+</button>
+
+              <a href="#" class="ms-3 text-decoration-underline text-dark"
+                >remove</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Push footer to bottom -->
+        <div class="mt-auto">
+          <h6 class="fw-bold mb-3">CART TOTAL : ₹499</h6>
+
+          <button class="btn btn-warning w-100 fw-semibold mb-3">
+            CHECKOUT →
+          </button>
+
+          <!-- Payment Icons -->
+          <div class="d-flex justify-content-between align-items-center">
+            <span>UPI</span>
+            <span>VISA</span>
+            <span>MasterCard</span>
+            <span>RuPay</span>
+            <span>AMEX</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="trackModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content support-modal">
+          <!-- Header -->
+          <div class="modal-header border-0">
+            <h5 class="modal-title fw-semibold">Track your order</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <!-- Body -->
+          <div class="modal-body px-4 pb-4">
+            <p class="text-muted mb-3">
+              Enter your WhatsApp number to get the latest order status.
+            </p>
+
+            <div class="input-group mb-4">
+              <span class="input-group-text">+91</span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter your WhatsApp number"
+              />
+            </div>
+
+            <button class="btn btn-warning w-100 fw-semibold">
+              CONTINUE →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="signinmodal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content support-modal">
+          <!-- Header -->
+          <div class="modal-header border-0">
+            <h5 class="modal-title fw-semibold">Enter Your Whatsapp No.</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <!-- Body -->
+          <div class="modal-body px-4 pb-4">
+            <div class="input-group mb-4">
+              <span class="input-group-text">+91</span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter your WhatsApp number"
+              />
+            </div>
+
+            <button class="btn btn-warning w-100 fw-semibold">
+              CONTINUE →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="supportModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content support-modal">
+          <!-- Header -->
+          <div class="modal-header border-0">
+            <h5 class="modal-title fw-semibold">How can we help?</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <!-- Body -->
+          <div class="modal-body p-0">
+            <a href="#" class="support-item">
+              <div>
+                <strong>Place a new order</strong>
+                <p>I am unable to place an order and need help.</p>
+              </div>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+
+            <a href="#" class="support-item">
+              <div>
+                <strong>Track my order</strong>
+                <p>
+                  If you have placed an order, track its latest status here!
+                </p>
+              </div>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+
+            <a href="#" class="support-item">
+              <div>
+                <strong>Change my design</strong>
+                <p>
+                  Your design is not confirmed yet. Still want to change it?
+                </p>
+              </div>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+
+            <a href="#" class="support-item">
+              <div>
+                <strong>Change delivery address</strong>
+                <p>I need to update my delivery address.</p>
+              </div>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+
+            <a href="#" class="support-item">
+              <div>
+                <strong>Shipping details</strong>
+                <p>Know shipping availability, time, and cost.</p>
+              </div>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+
+            <a href="#" class="support-item">
+              <div>
+                <strong>Get executive support</strong>
+                <p>Chat directly with a support executive.</p>
+              </div>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO SLIDER SECTION -->
+    <section class="py-4">
+      <div class="px-4">
+        <div class="hero-wrapper rounded-4 overflow-hidden">
+          <div class="swiper heroSwiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" data-link="story-books.html">
+                <img
+                  src="https://tada.kids/_next/image?url=https%3A%2F%2Fimages.tada.kids%2Fpublic%2Fbanner%2Fbanner-object-none%2FI251112162427490462.webp&w=3840&q=75"
+                  alt="Banner 1"
+                />
+              </div>
+
+              <div class="swiper-slide" data-link="story-books.html">
+                <img
+                  src="https://tada.kids/_next/image?url=https%3A%2F%2Fimages.tada.kids%2Fpublic%2Fbanner%2Fbanner-object-2%2FI250510191439512459.webp&w=3840&q=75"
+                  alt="Banner 2"
+                />
+              </div>
+
+              <div class="swiper-slide" data-link="story-books.html">
+                <img
+                  src="https://tada.kids/_next/image?url=https%3A%2F%2Fimages.tada.kids%2Fpublic%2Fbanner%2Fbanner-object-2%2FI250510191439512459.webp&w=3840&q=75"
+                  alt="Banner 2"
+                />
+              </div>
+
+              <div class="swiper-slide" data-link="story-books.html">
+                <img
+                  src="https://tada.kids/_next/image?url=https%3A%2F%2Fimages.tada.kids%2Fpublic%2Fbanner%2Fbanner-object-2%2FI250510191439512459.webp&w=3840&q=75"
+                  alt="Banner 2"
+                />
+              </div>
+
+              <div class="swiper-slide" data-link="story-books.html">
+                <img
+                  src="https://tada.kids/_next/image?url=https%3A%2F%2Fimages.tada.kids%2Fpublic%2Fbanner%2Fbanner-object-2%2FI250510191439512459.webp&w=3840&q=75"
+                  alt="Banner 2"
+                />
+              </div>
+            </div>
+
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-4 trending-section">
+      <div class="px-4">
+        <h2 class="text-center mb-4">Trending Collections</h2>
+
+        <div class="trending-grid">
+          <div class="trend-card" data-link="school-supplies.html">
+            <img
+              src="https://tada.kids/_next/image?url=https%3A%2F%2Fimages.tada.kids%2Fpublic%2Fcollection%2Fcollection-object-7%2FI250317120310449726.webp&w=640&q=75"
+              alt="School Supplies"
+            />
+            <p>School Supplies</p>
+          </div>
+
+          <div class="trend-card" data-link="name-labels.html">
+            <img
+              src="https://tada.kids/_next/image?url=https%3A%2F%2Fimages.tada.kids%2Fpublic%2Fcollection%2Fcollection-object-7%2FI250317120310449726.webp&w=640&q=75"
+              alt="Name Labels"
+            />
+            <p>Name Labels</p>
+          </div>
+
+          <div class="trend-card" data-link="bag-tags.html">
+            <img
+              src="https://tada.kids/_next/image?url=https%3A%2F%2Fimages.tada.kids%2Fpublic%2Fcollection%2Fcollection-object-5%2FI250317120230256904.webp&w=640&q=75"
+              alt="Bag Tags"
+            />
+            <p>Bag Tags</p>
+          </div>
+
+          <div class="trend-card" data-link="story-books.html">
+            <img
+              src="https://tada.kids/_next/image?url=https%3A%2F%2Fimages.tada.kids%2Fpublic%2Fcollection%2Fcollection-object-10%2FI250317120400461154.webp&w=640&q=75"
+              alt="Story Books"
+            />
+            <p>Story Books</p>
+          </div>
+
+          <div class="trend-card" data-link="caricatures.html">
+            <img
+              src="https://tada.kids/_next/image?url=https%3A%2F%2Fimages.tada.kids%2Fpublic%2Fcollection%2Fcollection-object-7%2FI250317120310449726.webp&w=640&q=75"
+              alt="Caricatures"
+            />
+            <p>Caricatures</p>
+          </div>
+
+          <div class="trend-card" data-link="stickers.html">
+            <img
+              src="https://tada.kids/_next/image?url=https%3A%2F%2Fimages.tada.kids%2Fpublic%2Fcollection%2Fcollection-object-6%2FI250317120258110429.webp&w=640&q=75"
+              alt="Stickers"
+            />
+            <p>Stickers</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-4 back-school-section">
+      <div class="px-4">
+        <h2 class="text-center">Back To School Collection</h2>
+        <p class="text-center subtitle">
+          Personalized essentials to make school fun, organized, and uniquely
+          yours!
+        </p>
+
+        <div class="product-grid">
+          <!-- Exam Board -->
+          <a href="category/exam-board.html" class="product-card">
+            <img
+              src="https://tada.kids/_next/image?url=https%3A%2F%2Fimages.tada.kids%2Fpublic%2Fproduct%2Fpersonalised-stainless-steel-lunch-box-with-child-name-photo%2FI250328174412539643.webp&w=750&q=75"
+              alt="Custom Exam Board"
+            />
+            <h4>Custom Exam Board for Kids</h4>
+            <div class="price">
+              <span class="new">₹599</span>
+              <span class="old">₹999</span>
+              <span class="off">40% Off</span>
+            </div>
+          </a>
+
+          <!-- Book Labels -->
+          <a href="category/book-labels.html" class="product-card">
+            <img
+              src="https://tada.kids/_next/image?url=https%3A%2F%2Fimages.tada.kids%2Fpublic%2Fproduct%2Fpersonalised-book-labels-with-child-cartoonised-photo-name%2FI250510234445205504.jpg&w=750&q=75"
+              alt="Book Labels"
+            />
+            <h4>Book Labels</h4>
+            <p class="desc">Personalised with cartoonised photo & name</p>
+            <div class="price">
+              <span class="new">₹399</span>
+              <span class="old">₹599</span>
+              <span class="off">33% Off</span>
+            </div>
+          </a>
+
+          <!-- Bag Tags -->
+          <a href="category/bag-tags.html" class="product-card">
+            <img
+              src="https://tada.kids/_next/image?url=https%3A%2F%2Fimages.tada.kids%2Fpublic%2Fproduct%2Fpersonalised-book-labels-with-child-cartoonised-photo-name%2FI250510234445205504.jpg&w=750&q=75"
+              alt="Bag Tags"
+            />
+            <h4>School Bag Tags</h4>
+            <p class="desc">Personalised with child cartoonised photo & name</p>
+            <div class="price">
+              <span class="new">₹399</span>
+              <span class="old">₹599</span>
+              <span class="off">33% Off</span>
+            </div>
+          </a>
+
+          <!-- Lunch Box -->
+          <a href="category/lunch-box.html" class="product-card">
+            <img
+              src="https://tada.kids/_next/image?url=https%3A%2F%2Fimages.tada.kids%2Fpublic%2Fproduct%2Fpersonalised-book-labels-with-child-cartoonised-photo-name%2FI250510234445205504.jpg&w=750&q=75"
+              alt="Lunch Box"
+            />
+            <h4>Stainless Steel Lunch Box</h4>
+            <p class="desc">Personalised with child photo & name</p>
+            <div class="price">
+              <span class="new">₹999</span>
+              <span class="old">₹1999</span>
+              <span class="off">50% Off</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-container">
+        <!-- Brand -->
+        <div class="footer-col brand">
+          <img src="assets/logo.png" alt="TADA Kids" class="logo" />
+          <p>
+            We personalise gifts that spark imagination, build confidence, and
+            create lasting memories.
+          </p>
+
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-pinterest-p"></i></a>
+          </div>
+        </div>
+
+        <!-- Company Info -->
+        <div class="footer-col">
+          <h4>Company Info</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Shipping & Return</a></li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div class="footer-col">
+          <h4>Our Support</h4>
+          <ul>
+            <li><a href="#">Track Order</a></li>
+            <li><a href="#">Order Bulk</a></li>
+            <li><a href="#">Blogs</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+        </div>
+
+        <!-- Payment -->
+        <div class="footer-col">
+          <h4>Secure Payment Methods</h4>
+          <div class="payment-icons">
+            <img src="images/upi.png" alt="UPI" />
+            <img src="images/visa.png" alt="Visa" />
+            <img src="images/mastercard.png" alt="Mastercard" />
+            <img src="images/rupay.png" alt="Rupay" />
+            <img src="images/amex.png" alt="American Express" />
+            <img src="images/netbanking.png" alt="Net Banking" />
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © Copyright  Pvt Ltd. All Rights Reserved
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+      function toggleSearch() {
+        const search = document.getElementById("mobileSearch");
+        search.style.display =
+          search.style.display === "block" ? "none" : "block";
+      }
+    </script>
+    <script>
+      const swiper = new Swiper(".heroSwiper", {
+        loop: true,
+        effect: "fade",
+        fadeEffect: { crossFade: true },
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+
+      // Pause on hover
+      const hero = document.querySelector(".heroSwiper");
+      hero.addEventListener("mouseenter", () => swiper.autoplay.stop());
+      hero.addEventListener("mouseleave", () => swiper.autoplay.start());
+    </script>
+
+    <script>
+      document.querySelectorAll(".swiper-slide").forEach((card) => {
+        card.addEventListener("click", () => {
+          const link = card.getAttribute("data-link");
+          if (link) {
+            window.location.href = link;
+          }
+        });
+      });
+
+      document.querySelectorAll(".trend-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          const link = card.getAttribute("data-link");
+          if (link) {
+            window.location.href = link;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
