@@ -39,7 +39,7 @@
 
       /* Logo image */
       .logo img {
-        height: 45px; 
+        height: 50px; /* perfect for navbar */
         width: auto;
         object-fit: contain;
         transition:
@@ -658,6 +658,35 @@
       .support-item:hover i {
         color: #f46c4e;
       }
+
+
+
+
+      .feature-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.feature-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(107, 70, 193, 0.4); /* purple glow */
+}
+
+.icon-wrapper {
+  display: inline-block;
+  transition: filter 0.3s ease;
+}
+
+.feature-item:hover .icon-wrapper {
+  filter: drop-shadow(0 0 6px rgba(107, 70, 193, 0.7));
+}
+
+.icon-svg {
+  display: block;
+  margin: 0 auto;
+}
+
     </style>
   </head>
   <body>
@@ -1133,6 +1162,9 @@
       </div>
     </section>
 
+
+
+    
     <section class="py-4 back-school-section">
       <div class="px-4">
         <h2 class="text-center">Back To School Collection</h2>
@@ -1203,6 +1235,89 @@
         </div>
       </div>
     </section>
+
+
+    <section class="py-5">
+  <div class="px-4">
+    <div class="d-flex justify-content-between align-items-center flex-wrap text-center gap-4">
+
+      <!-- Feature 1 -->
+      <div class="flex-fill feature-item" style="min-width: 160px; cursor: default;">
+        <div class="mb-3 icon-wrapper">
+          <!-- Truck Free Delivery SVG -->
+          <svg width="64" height="64" fill="#6b46c1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="icon-svg">
+            <path d="M3 10h1v5h12v-5h1l3 3v2h-2a3 3 0 0 1-6 0H9a3 3 0 0 1-6 0H1v-2l2-3zm15 5a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
+            <text x="5" y="15" font-size="8" fill="#fff">FREE</text>
+          </svg>
+        </div>
+        <p class="text-primary fw-semibold mb-0" style="font-size: 18px;">All India Free Delivery</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="flex-fill feature-item" style="min-width: 160px; cursor: default;">
+        <div class="mb-3 icon-wrapper">
+          <!-- Dispatch Clock SVG -->
+          <svg width="64" height="64" fill="#22c55e" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="icon-svg">
+            <circle cx="12" cy="12" r="10" stroke="none" fill="#22c55e"/>
+            <path d="M12 6v6l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            <text x="7" y="20" font-size="8" fill="#fff">48H</text>
+          </svg>
+        </div>
+        <p class="text-primary fw-semibold mb-0" style="font-size: 18px;">Dispatch Within 48 Hours</p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="flex-fill feature-item" style="min-width: 160px; cursor: default;">
+        <div class="mb-3 icon-wrapper">
+          <!-- Puzzle SVG -->
+          <svg width="64" height="64" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="icon-svg">
+            <path d="M7 7h5v5H7zM12 7h5v5h-5zM7 12h5v5H7z" stroke="#fbbf24" stroke-width="2" />
+          </svg>
+        </div>
+        <p class="text-primary fw-semibold mb-0" style="font-size: 18px;">Personalised For you</p>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="flex-fill feature-item" style="min-width: 160px; cursor: default;">
+        <div class="mb-3 icon-wrapper">
+          <!-- Badge SVG -->
+          <svg width="64" height="64" fill="#7c3aed" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="icon-svg">
+            <circle cx="12" cy="12" r="10" fill="#7c3aed"/>
+            <circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="2" fill="none"/>
+            <path d="M9 15l3-3 3 3" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="text-primary fw-semibold mb-0" style="font-size: 18px;">Made To Last</p>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="flex-fill feature-item" style="min-width: 160px; cursor: default;">
+        <div class="mb-3 icon-wrapper">
+          <!-- Shopping Bag SVG -->
+          <svg width="64" height="64" fill="#14b8a6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="icon-svg">
+            <rect x="6" y="8" width="12" height="10" rx="2" ry="2" fill="#14b8a6"/>
+            <path d="M9 8v-2a3 3 0 0 1 6 0v2" stroke="#fff" stroke-width="2" fill="none"/>
+            <path d="M12 13v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="text-primary fw-semibold mb-0" style="font-size: 18px;">Easy Ordering</p>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="flex-fill feature-item" style="min-width: 160px; cursor: default;">
+        <div class="mb-3 icon-wrapper">
+          <!-- Heart SVG -->
+          <svg width="64" height="64" fill="#ef4444" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="icon-svg">
+            <path d="M12 21s-6-4.35-6-9.5S9 4 12 7c3-3 6 1.5 6 4.5s-6 9.5-6 9.5z"/>
+          </svg>
+        </div>
+        <p class="text-primary fw-semibold mb-0" style="font-size: 18px;">Happiness Guaranteed</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
     <footer class="site-footer">
       <div class="footer-container">
